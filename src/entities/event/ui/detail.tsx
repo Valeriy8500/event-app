@@ -1,4 +1,5 @@
 import { RouterOutput } from "@/shared/api";
+import { useRouter } from "next/router";
 
 type EventDetailProps = NonNullable<RouterOutput["event"]["findUnique"]>;
 
@@ -8,12 +9,26 @@ export const EventDetail = ({
   date,
   participations,
 }: EventDetailProps) => {
+
+  const router = useRouter();
+  const editEventId = Number(router.query.id);
+
+  const handleClick = () => {
+    router.push(`/events/edit/${editEventId}`);
+  };
+
   return (
     <div>
-      <div className="px-4 sm:px-0">
+      <div className="flex justify-between px-4 sm:px-0">
         <h3 className="text-base font-semibold leading-7 text-gray-900">
           Информация о событии
         </h3>
+        <button
+          className="h-10 px-6 font-semibold rounded-md bg-customBlue text-white"
+          onClick={handleClick}
+        >
+          Редактировать событие
+        </button>
       </div>
       <div className="mt-6 border-t border-gray-100">
         <dl className="divide-y divide-gray-100">

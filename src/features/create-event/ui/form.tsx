@@ -4,16 +4,24 @@ import { CreateEventSchema } from "@/shared/api";
 
 type CreateEventFormProps = {
   onSubmit: (data: CreateEventSchema) => void;
+  defaultValues?: Partial<CreateEventSchema>; 
+  isEdit?: boolean;
 };
 
-export const CreateEventForm = ({ onSubmit }: CreateEventFormProps) => {
+export const CreateEventForm = ({
+  onSubmit,
+  defaultValues = {},
+  isEdit = false,
+}: CreateEventFormProps) => {
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<CreateEventSchema>({
     resolver: zodResolver(CreateEventSchema),
     mode: "onChange",
+    defaultValues
   });
 
   return (
@@ -21,10 +29,10 @@ export const CreateEventForm = ({ onSubmit }: CreateEventFormProps) => {
       <div className="space-y-12">
         <div>
           <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Событие
+            {isEdit ? "Редактирование события" : "Создание события"}
           </h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
-            Заполните форму для создания события
+            {isEdit ? "Измените информацию о событии" : "Заполните форму для создания события"}
           </p>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -66,13 +74,9 @@ export const CreateEventForm = ({ onSubmit }: CreateEventFormProps) => {
                   {...register("description")}
                 />
               </div>
-              {errors.description ? (
+              {errors.description && (
                 <p className="mt-3 text-sm leading-6 text-red-500">
                   {errors.description.message}
-                </p>
-              ) : (
-                <p className="mt-3 text-sm leading-6 text-gray-600">
-                  Напишите несколько предложений о предстоящем мероприятии
                 </p>
               )}
             </div>
@@ -113,9 +117,10 @@ export const CreateEventForm = ({ onSubmit }: CreateEventFormProps) => {
           type="submit"
           className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          Создать
+          {isEdit ? "Сохранить изменения" : "Создать"}
         </button>
       </div>
     </form>
   );
 };
+

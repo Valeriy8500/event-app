@@ -15,3 +15,12 @@ export const JoinEventSchema = z.object({
 export const LeaveEventSchema = z.object({
   id: z.number()
 });
+
+export const UpdateEventSchema = z.object({
+  id: z.number(),
+  data: z.object({
+    title: z.string().min(1),
+    description: z.string().optional(),
+    date: z.coerce.date(),
+  })
+});
