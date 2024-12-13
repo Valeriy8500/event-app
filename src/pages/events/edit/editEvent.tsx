@@ -19,9 +19,8 @@ export default function EditEvent({ eventId }: EditEventProps) {
         }
     });
 
-    const handleSubmit = (data: any) => {
-        console.log('data: ', { id: eventId, ...data });
-        mutate({ id: eventId, ...data }); // Отправляем данные с ID события
+    const handleSubmit = (data: CreateEventSchema) => {
+        mutate({ id: eventId, data }); // Отправляем данные с ID события
     };
 
     if (!event) return <p>Загрузка...</p>;

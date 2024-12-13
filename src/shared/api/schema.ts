@@ -24,3 +24,4 @@ export const UpdateEventSchema = z.object({
     date: z.coerce.date(),
   })
 });
+
