@@ -4,7 +4,7 @@ import { CreateEventSchema } from "@/shared/api";
 
 type CreateEventFormProps = {
   onSubmit: (data: CreateEventSchema) => void;
-  defaultValues?: Partial<CreateEventSchema>; 
+  defaultValues?: Partial<CreateEventSchema>;
   isEdit?: boolean;
 };
 
@@ -19,11 +19,11 @@ export const CreateEventForm = ({
     handleSubmit,
     formState: { errors }
   } = useForm<CreateEventSchema>({
-    resolver: zodResolver(CreateEventSchema),
+    resolver: zodResolver(CreateEventSchema), 
     mode: "onChange",
     defaultValues
   });
-
+ 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-12">
@@ -37,10 +37,7 @@ export const CreateEventForm = ({
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-4">
-              <label
-                htmlFor="title"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <label htmlFor="title" className="block text-sm font-medium leading-6 text-gray-900">
                 Название
               </label>
               <div className="mt-2">
@@ -60,10 +57,7 @@ export const CreateEventForm = ({
             </div>
 
             <div className="col-span-full">
-              <label
-                htmlFor="description"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <label htmlFor="description" className="block text-sm font-medium leading-6 text-gray-900">
                 Описание
               </label>
               <div className="mt-2">
@@ -82,10 +76,7 @@ export const CreateEventForm = ({
             </div>
 
             <div className="col-span-full">
-              <label
-                htmlFor="date"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <label htmlFor="date" className="block text-sm font-medium leading-6 text-gray-900">
                 Дата проведения
               </label>
               <div className="mt-2">
@@ -107,16 +98,10 @@ export const CreateEventForm = ({
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button
-          type="button"
-          className="text-sm font-semibold leading-6 text-gray-900"
-        >
+        <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
           Отмена
         </button>
-        <button
-          type="submit"
-          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
+        <button type="submit" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           {isEdit ? "Обновить" : "Создать"}
         </button>
       </div>

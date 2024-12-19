@@ -31,7 +31,8 @@ export default function EditEvent({ eventId }: EditEventProps) {
             defaultValues={{
                 title: event.title,
                 description: event.description ?? undefined,
-                date: event.date ? new Date(event.date) : undefined
+                // date: event.date ? new Date(event.date) : undefined
+                date: event.date ? new Date(event.date).toISOString().split('T')[0] : undefined
             }}
             isEdit
         />
