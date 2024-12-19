@@ -20,7 +20,10 @@ export default function EditEvent({ eventId }: EditEventProps) {
     });
 
     const handleSubmit = (data: CreateEventSchema) => {
-        mutate({ id: eventId, data }); // Отправляем данные с ID события
+        mutate({
+            id: eventId,
+            data: { ...data, date: typeof data.date === "string" ? new Date(data.date) : data.date }
+        });
     };
 
     if (!event) return <p>Загрузка...</p>;
@@ -31,7 +34,6 @@ export default function EditEvent({ eventId }: EditEventProps) {
             defaultValues={{
                 title: event.title,
                 description: event.description ?? undefined,
-                // date: event.date ? new Date(event.date) : undefined
                 date: event.date ? new Date(event.date).toISOString().split('T')[0] : undefined
             }}
             isEdit

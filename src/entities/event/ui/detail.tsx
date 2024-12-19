@@ -58,7 +58,7 @@ export const EventDetail = ({
   const canEdit = currentUserId === authorId; // Проверяем права редактирования
 
   return (
-    <>
+    <div className="px-4">
       <div className="flex justify-between px-4 sm:px-0">
         <h3 className="text-base font-semibold leading-7 text-gray-900">
           Информация о событии
@@ -125,6 +125,6 @@ export const EventDetail = ({
           </div>
         )
       }
-    </>
+    </div>
   );
 };

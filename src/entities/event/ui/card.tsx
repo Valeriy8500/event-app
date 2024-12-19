@@ -18,7 +18,7 @@ export const EventCard = ({
   action,
 }: EventCardProps) => {
   return (
-    <div className="flex font-sans rounded-lg shadow-xl overflow-hidden">
+    <div className="flex font-sans rounded-lg shadow-xl overflow-hidden px-4">
       <div className="flex-none w-48 relative">
         <Image
           src="/poster.png"

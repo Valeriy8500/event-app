@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateEventSchema } from "@/shared/api";
+import { useRouter } from "next/router";
 
 type CreateEventFormProps = {
   onSubmit: (data: CreateEventSchema) => void;
@@ -14,6 +15,8 @@ export const CreateEventForm = ({
   isEdit = false,
 }: CreateEventFormProps) => {
 
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -26,7 +29,7 @@ export const CreateEventForm = ({
  
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-12">
+      <div className="space-y-12 px-4">
         <div>
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             {isEdit ? "Редактирование события" : "Создание события"}
@@ -98,7 +101,7 @@ export const CreateEventForm = ({
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+        <button type="button" className="text-sm font-semibold leading-6 text-gray-900" onClick={() => router.back()}>
           Отмена
         </button>
         <button type="submit" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">

@@ -60,20 +60,7 @@ export const eventRouter = router({
   update: procedure
     .input(UpdateEventSchema)
     .use(isAuth)
-    .mutation(async ({ input, ctx: { user } }) => {
-      const event = await prisma.event.findUnique({
-        where: { id: input.id },
-        select: { authorId: true },
-      });
-
-      if (!event) {
-        throw new Error("Событие не найдено.");
-      }
-
-      if (event.authorId !== user.id) {
-        throw new Error("У вас нет прав на редактирование этого события.");
-      }
-
+    .mutation(async ({ input }) => {
       const updatedEvent = await prisma.event.update({
         where: { id: input.id },
         data: input.data,
