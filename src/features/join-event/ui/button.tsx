@@ -1,4 +1,5 @@
 import { trpc } from "@/shared/api";
+import { useSession } from "next-auth/react";
 
 type JoinEventButtonProps = {
   eventId: number;
@@ -9,16 +10,19 @@ export const JoinEventButton = ({
   eventId,
   onSuccess,
 }: JoinEventButtonProps) => {
+  const { data: session } = useSession();
   const { mutate } = trpc.event.join.useMutation({ onSuccess });
 
   const handleClick = () => {
-    mutate({ id: eventId });
+    if (session?.user) mutate({ id: eventId });
   };
 
   return (
     <button
-      className="h-10 px-6 font-semibold rounded-md bg-black text-white"
+      className="h-10 px-6 font-semibold rounded-md bg-black text-white disabled:bg-gray-400"
       onClick={handleClick}
+      disabled={!session?.user}
+      title={!session?.user ? "Пожалуйста, войдите в систему" : ""}
     >
       Присоединиться
     </button>

@@ -12,15 +12,15 @@ export default function Event() {
   });
 
   if (isLoading) {
-    return "Loading...";
+    return <p className="flex justify-center">Загрузка...</p>;
   }
 
   if (session.status === "unauthenticated") {
-    return "Forbidden";
+    return <p className="flex justify-center">Вы не авторизованы</p>;
   }
 
   if (!data) {
-    return "No data";
+    return <p className="flex justify-center">Нет данных</p>;
   }
 
   return <EventDetail {...data} />;
