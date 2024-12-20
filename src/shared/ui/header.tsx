@@ -13,13 +13,23 @@ export const Header = () => {
         router.push("/api/auth/signin");
     };
 
+    const handleHome = () => {
+        router.push("/");
+    };
+
     // Определение текущей страницы
     const isCreateEventPage = router.pathname === "/events/create";
     const isEditEventPage = router.pathname.startsWith("/events/edit/");
 
     return (
         <header className="flex justify-between items-center w-full bg-white shadow-md sticky top-0 z-50 py-4 px-4 mb-2.5">
-            <h1 className="text-xl font-bold">EventApp</h1>
+            <h1
+                className="text-xl font-bold cursor-pointer"
+                onClick={handleHome}
+                title="На главную"
+            >
+                EventApp
+            </h1>
             <div className="flex items-center gap-4">
                 {session?.user ? (
                     <>
